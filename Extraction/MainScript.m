@@ -90,7 +90,7 @@ clearvars A
     clearvars -except d subfold
     
 %% Build input table
-% Select as desired. The default options is for building regression models.
+% Select as desired. The default options are set for building input tables to create regression models, without missing data.
 
 % Missing data. Mantain missing data?
 % True = Mantain missing data (may need an imputation method)

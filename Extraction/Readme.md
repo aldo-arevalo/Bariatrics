@@ -4,3 +4,6 @@ The data source is not publicly available. These codes is only for informative p
 
 ## Structure
 Please refer to MainScript.m to run all the other scripts in sequence to build the input table.
+
+## Supporting scripts
+These scripts contain mainly functions used on different sections/scripts uploaded.

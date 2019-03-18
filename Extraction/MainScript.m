@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Dataset: Catharina Hospital
-% Language: MATLAB 2016 and forward
+% Language: MATLAB 2016a and forward
 % Author: Aldo R. Arevalo
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Run scripts in correct order and save variables
@@ -90,6 +90,7 @@ clearvars A
     clearvars -except d subfold
     
 %% Build input table
+% Select as desired. The default options is for building regression models.
 
 % Missing data. Mantain missing data?
 % True = Mantain missing data (may need an imputation method)

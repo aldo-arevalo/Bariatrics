@@ -1,4 +1,5 @@
-function [threshold, threshold_AUC] = getPerformanceMetrics(realtarget,predictedtarget,list_threshold)
+function [threshold, threshold_AUC] = getPerformanceMetrics(realtarget,...
+    predictedtarget,list_threshold)
 
 res = [];
 

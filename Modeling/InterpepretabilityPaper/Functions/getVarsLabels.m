@@ -15,7 +15,10 @@ function [labels] = getVarsLabels(variable_names, Options)
 %       labels  ... M cell vector,
 %                   M is the number of features with generic names
 %
-% Author: Aldo Arevalo, 2018
+% Dependencies: getDataset > getPartitions
+%
+% Author: Aldo Arevalo
+% Date: 10/11/2020
 
 % Create string vectors
    labels1 = {'p[Albumin]','p[ALP]','p[ALAT]','p[ASAT]','p[Bili]',...

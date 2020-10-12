@@ -17,3 +17,5 @@ Modeling/InterpepretabilityPaper/Partitions/*.mat
 ################################
 Modeling/InterpepretabilityPaper/Plots/DecisionTree/*.fig
 Modeling/InterpepretabilityPaper/Plots/DecisionTree/*.m
+
+Modeling/InterpepretabilityPaper/Functions/fmid-v40/*.mat

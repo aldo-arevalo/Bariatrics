@@ -2,6 +2,41 @@ function [selected_set, AUC_selected_set, results] = ...
     SFSTS(Xtrain,Ytrain,Xtest,Ytest,options,FM,predictorNames,...
     responseName,clust_method,seed,UF)
 
+% Function to run Sequential Forward Selection (SFS) for Logistic
+% Regression models
+%
+% INPUTS:
+%       Xtrain:         Table that contains the input features for
+%                       training.
+%       Ytrain:         Table vector that contains the output variable for
+%                       training the model.
+%       Xtest:          Table that contains the input variables for
+%                       validation.
+%       Ytest:          Table vector that contains the output variable for
+%                       validating the model.
+%       options:        Array that indicates the plotting, undersampling
+%                       and display behaviour.
+%       FM:             Fuzzy model structure. Read more on fmstruct.m
+%       predictorNames: Cell array that contains the names of the input
+%                       features.
+%       responseName:   String that specifies the name of the output
+%                       variable.
+%       clust_method:   String that specifies the clustering algorithm.
+%       seed:           Float that specifies seed for model initialization.
+%       UF:             Float that specifies the undersampling factor.
+%
+% OUTPUTS:
+%       selected_set:     Array tha contains the indices of the selected
+%                         features.
+%       AUC_selected_set: AUC value of the final feature subset.
+%       results:          Matrix that contains
+%
+%
+% Dependencies: M1_Modeling > featureSelectionFS
+%
+% Author: Aldo Arévalo
+% Date: 10/12/2020
+
 nr_features=size(Xtrain,2);
 stop=0;
 count=1;

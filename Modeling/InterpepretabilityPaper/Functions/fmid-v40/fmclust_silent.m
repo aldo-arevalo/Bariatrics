@@ -96,13 +96,13 @@ MFTYPE = 3;     % type of membership functions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % loop through the outputs
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-for k = 1 : NO,                 % for all outputs
+for k = 1 : NO                 % for all outputs
    FM.rls{k} = [];
    FM.mfs{k} = {};
    FM.V{k} = [];
-end;
+end
 
-for k = out,                 % for given outputs
+for k = out                 % for given outputs
 
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    % make regression matrix and data matrix
@@ -110,12 +110,12 @@ for k = out,                 % for given outputs
    dat = [];
    datcons = [];
    commondat = [];
-   for b = 1 : length(U),
-      if Ninps == 0,
+   for b = 1 : length(U)
+      if Ninps == 0
          z = Y{b};
       else
          z = [Y{b} U{b}];
-      end;
+      end
 
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       % antecedent regressors
@@ -181,9 +181,9 @@ for k = out,                 % for given outputs
       if (show ~= 0)
          fprintf(['Output ' num2str(k), ': clustering data in ' num2str(c(k)) ' clusters ...\n']);
          drawnow
-      end;
-      rand('seed',FM.seed);
-      %rng(FM.seed);
+      end
+%       rand('seed',FM.seed);
+      rng(FM.seed,'twister');
       [mu,V,P,Phi,Lam] = gkfast(dat,c(k),m(k),FM.tol,0);
       %[mu,~,V,P,Phi,Lam,~,~] = GKclust(dat,c(k),m(k));
       [dum,ind] = sort(V(:,1));
@@ -217,7 +217,7 @@ for k = out,                 % for given outputs
          mfstep = round(ND/100); if mfstep < 1, mfstep = 1; end;
          OPT = optimset('MaxFunEvals',1000,'Display','off');  
          %OPT = foptions; OPT(14) = 1000;
-         for i = 1 : NI,
+         for i = 1 : NI
             [ds,fs]=smoothmf(dat(1:mfstep:ND,i),mu(1:mfstep:ND,:));
             mf = mffit(ds,fs,MFTYPE,OPT,[1 0 0]);
             lim = mf(:,3) == min(mf(:,3)); mf(lim,2:3) = ones(sum(lim),1)*[rlimits(i,1) rlimits(i,1)];
@@ -250,7 +250,7 @@ for k = out,                 % for given outputs
    Part.V{k} = V; Part.F{k} = P;
    Part.Phi{k} = Phi; Part.Lam{k} = Lam;
 
-end;
+end
 
 if (show ~= 0),
    fprintf(1,['Estimating consequent parameters ...\n']); drawnow

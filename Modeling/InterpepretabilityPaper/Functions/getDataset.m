@@ -42,6 +42,8 @@ catch
     disp('Age_ NOT REMOVED')
 end
 
+Options.input(:,{'Sex','roken','diabet','rokenpy','TBFM'})=[];
+
 %% Options
 
 if Options.Classification == true
@@ -184,8 +186,8 @@ if sum(tmp_exist_vID120881) == 1
 end
 
 % Gender, roken, diabet, hypert, dyslip
-data_table = convertvars(data_table,{'Sex','roken','diabet'},...
-    'categorical');
+% data_table = convertvars(data_table,{'Sex','roken','diabet'},...
+%     'categorical');
 
 tmp_exist_Sex = strcmp(data_table.Properties.VariableNames,'Sex');
 tmp_exist_roken = strcmp(data_table.Properties.VariableNames,'roken');

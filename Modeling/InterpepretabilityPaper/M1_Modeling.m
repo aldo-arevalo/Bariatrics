@@ -40,7 +40,7 @@ choice(1)=1; % stop criterion:
 % if 0 % dont stop when there is no improvement
 % if 1 % stop when there is no improvement (faster)
 
-choice(2)=1; % plot results:
+choice(2)=0; % plot results:
 % if 0 % dont plot
 % if 1 % plot performance results and number of features
 
@@ -55,7 +55,7 @@ choice(4)=1; % random undersampling without replacement
 % EXAMPLES:
 %   1 => 1 entry from minority class:1 entry from dominant class
 %   1.3 => 1 entry from minority class:1.3 entries from dominant class
-Options.undersampling_factor = 1.3;
+Options.undersampling_factor = 1.0;
 
 % Penalization for false positives (FP) and false negatives (FN)
 Options.Cost_FP = 5;

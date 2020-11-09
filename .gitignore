@@ -10,8 +10,11 @@ Thumbs.db
 
 # Don't share datasets #
 ########################
+*.xlsx
+*.csv
+Extraction/CZE_data_extraction/**/**/*.mat
 Modeling/InterpepretabilityPaper/Datasets
-Modeling/InterpepretabilityPaper/Partitions/*.mat
+Modeling/InterpepretabilityPaper/Partitions/**
 
 # Don't share MATLAB's figures #
 ################################
@@ -21,3 +24,9 @@ Modeling/InterpepretabilityPaper/Plots/DecisionTree/*.m
 Modeling/InterpepretabilityPaper/Functions/fmid-v40/**/*.mat
 Modeling/InterpepretabilityPaper/Results/**/*.mat
 Modeling/InterpepretabilityPaper/Functions/fmid-v40/private/
+
+# Don't share Bibliography, docs, images
+################################
+Modeling/InterpepretabilityPaper/Bibliography
+*.docx
+*.eps

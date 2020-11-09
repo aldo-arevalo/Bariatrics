@@ -33,16 +33,35 @@ function [FM,Part,mu] = fmclust2(Dat,FM,out)
 
 % (c) Robert Babuska, Stanimir Mollov 1997-1999
 
-if isfield(Dat,'U'); U = Dat.U;
-elseif isfield(Dat,'X')'; U = Dat.X;
-elseif isfield(Dat,'x')'; U = Dat.x;
-elseif isfield(Dat,'u')'; U = Dat.u; else U = []; end;
-if isfield(Dat,'Y'); Y = Dat.Y;
-elseif isfield(Dat,'y'); Y = Dat.y; else Y = []; end;
-if ~iscell(U), U = {U}; end; if ~iscell(Y), Y = {Y}; end;
+if isfield(Dat,'U')
+    U = Dat.U;
+elseif isfield(Dat,'X')' 
+    U = Dat.X;
+elseif isfield(Dat,'x')'
+    U = Dat.x;
+elseif isfield(Dat,'u')'
+    U = Dat.u;
+else
+    U = [];
+end
 
-if isfield(Dat,'Ts'); Ts = Dat.Ts; else Ts = 1; end;
-if isfield(Dat,'FileName'); FM.FileName = Dat.FileName; else FM.FileName = ''; end;
+if isfield(Dat,'Y')
+    Y = Dat.Y;
+elseif isfield(Dat,'y')
+    Y = Dat.y; 
+else
+    Y = []; 
+end
+
+if ~iscell(U), U = {U}; end; if ~iscell(Y), Y = {Y}; end
+
+if isfield(Dat,'Ts')
+    Ts = Dat.Ts; 
+else
+    Ts = 1; 
+end
+
+if isfield(Dat,'FileName'); FM.FileName = Dat.FileName; else FM.FileName = ''; end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % get dimensions
@@ -57,32 +76,32 @@ FM = fmupdate(FM);
 ny = FM.Ny;
 nu = FM.Nu;
 
-if Ninps == 0, nu = zeros(NO,1); nd = nu; end;
+if Ninps == 0, nu = zeros(NO,1); nd = nu; end
 
-if isfield(FM,'c'); c = FM.c; else c = 1; end;
-if isfield(FM,'m'); m = FM.m; else m = 2; end;
+if isfield(FM,'c'); c = FM.c; else c = 1; end
+if isfield(FM,'m'); m = FM.m; else m = 2; end
 if isfield(FM,'ante'); ante = FM.ante; else ante = 1; end;
-if isfield(FM,'cons'); cons = FM.cons; else cons = 1; end;
-if ~isfield(FM,'tol'); FM.tol = 0.01; end;
-if ~isfield(FM,'seed'); FM.seed = sum(100*clock); end;
+if isfield(FM,'cons'); cons = FM.cons; else cons = 1; end
+if ~isfield(FM,'tol'); FM.tol = 0.01; end
+if ~isfield(FM,'seed'); FM.seed = sum(100*clock); end
 
-if length(c) == 1, c = c*ones(1,NO); end;
-if length(m) == 1, m = m*ones(1,NO); end;
-if length(ante) == 1, ante = ante*ones(1,NO); end;
-if length(cons) == 1, cons = cons*ones(1,NO); end;
+if length(c) == 1, c = c*ones(1,NO); end
+if length(m) == 1, m = m*ones(1,NO); end
+if length(ante) == 1, ante = ante*ones(1,NO); end
+if length(cons) == 1, cons = cons*ones(1,NO); end
 
 FM.c = c; FM.m = m; FM.ante = ante; FM.cons = cons;
 if isfield(Dat,'InputName'); FM.InputName = Dat.InputName;
-elseif Ninps > 1, for j = 1 : Ninps, FM.InputName{j} = ['u_' num2str(j)]; end;
-else FM.InputName{1} = 'u'; end;
+elseif Ninps > 1, for j = 1 : Ninps, FM.InputName{j} = ['u_' num2str(j)]; end
+else FM.InputName{1} = 'u'; end
 if isfield(Dat,'OutputName'); FM.OutputName = Dat.OutputName;
-elseif NO > 1, for j = 1 : NO, FM.OutputName{j} = ['y_' num2str(j)]; end;
-else FM.OutputName{1} = 'y'; end;
+elseif NO > 1, for j = 1 : NO, FM.OutputName{j} = ['y_' num2str(j)]; end
+else FM.OutputName{1} = 'y'; end
 
-if ~iscell(FM.OutputName), FM.OutputName = {FM.OutputName}; end;
-if ~iscell(FM.InputName), FM.InputName = {FM.InputName}; end;
+if ~iscell(FM.OutputName), FM.OutputName = {FM.OutputName}; end
+if ~iscell(FM.InputName), FM.InputName = {FM.InputName}; end
 
-if nargin < 3, out = 1 : NO; end;
+if nargin < 3, out = 1 : NO; end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % define constants etc.
@@ -105,7 +124,7 @@ for k = 1 : NO                 % for all outputs
    FM.rls{k} = [];
    FM.mfs{k} = {};
    FM.V{k} = [];
-end;
+end
 
 for k = out                 % for given outputs
 
@@ -120,7 +139,7 @@ for k = out                 % for given outputs
          z = Y{b};
       else
          z = [Y{b} U{b}];
-      end;
+      end
 
       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
       % antecedent regressors
@@ -141,7 +160,7 @@ for k = out                 % for given outputs
       antesize = size(dat,1);
       conssize = size(datcons,1);
 
-      if antesize < conssize,
+      if antesize < conssize
          dd = datcons;
          clear datcons
          datcons = dd(end-antesize+1:end,:);
@@ -170,7 +189,7 @@ for k = out                 % for given outputs
 %       [yr,ur,y1]=regres([Y{b}(:,k) z],unitedoutputs(k,:),unitedinputs(k,:));
 %       commondat = [commondat;[ur y1]];  
      
-   end;
+   end
    ND = size(dat,1); NI = size(dat,2)-1;
    dat = dat(1:clstep:ND,:);
    rls = (1:c(k))'*ones(1,NI);
@@ -186,8 +205,9 @@ for k = out                 % for given outputs
       if (show ~= 0)
          fprintf(['Output ' num2str(k), ': clustering data in ' num2str(c(k)) ' clusters ...\n']);
          drawnow
-      end;
-      rand('seed',FM.seed);
+      end
+%       rand('seed',FM.seed);
+      rng(FM.seed, 'twister')
 %       [mu,V,P,Phi,Lam] = gkfast(dat,c(k),m(k),FM.tol,0);
 %       [dum,ind] = sort(V(:,1));
 %       mu = mu(:,ind); V = V(ind,:); P = P(:,:,ind);
@@ -195,7 +215,7 @@ for k = out                 % for given outputs
 
       options(1) = m(k);	% exponent for the partition matrix U (default: 2.0)
       options(2) = 100;	% maximum number of iterations (default: 100)
-      %options(3) = FM.tol;		% minimum amount of improvement (default: 1e-5)
+      options(3) = FM.tol;		% minimum amount of improvement (default: 1e-5)
       options(4) = 0;		% info display during iteration (default: 1)
       [V, mu] = fcm(dat, c(k), options);
       mu = mu';
@@ -215,8 +235,8 @@ for k = out                 % for given outputs
           NI1 = 1/NI;
           for j = 1 : c(k)
               M(:,:,j) = det(P(1:NI,1:NI,j)).^NI1*inv(P(1:NI,1:NI,j));
-          end;
-      end;
+          end
+      end
       
 %       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %       % Construct M matrix
@@ -233,37 +253,37 @@ for k = out                 % for given outputs
       mfs = {};
       if ante(k) == 2        % projected MFs
          if (show ~= 0)
-            fprintf(1,['          extracting membership functions ...\n']);
+            fprintf(1,'          extracting membership functions ...\n');
             drawnow
-         end;
+         end
 
          range   = [min(dat(:,1:NI))'  max(dat(:,1:NI))'];
          perc = 50;
          safety = perc*0.01*(range(:,2) - range(:,1));
          rlimits = [range(:,1)-safety range(:,2)+safety];
 
-         mfstep = round(ND/100); if mfstep < 1, mfstep = 1; end;
+         mfstep = round(ND/100); if mfstep < 1, mfstep = 1; end
          OPT = optimset('MaxFunEvals',1000,'Display','off');  
          %OPT = foptions; OPT(14) = 1000;
          for i = 1 : NI
             [ds,fs]=smoothmf(dat(1:mfstep:ND,i),mu(1:mfstep:ND,:));
             mf = mffit(ds,fs,MFTYPE,OPT,[1 0 0]);
             lim = mf(:,3) == min(mf(:,3)); mf(lim,2:3) = ones(sum(lim),1)*[rlimits(i,1) rlimits(i,1)];
-            if mf(lim,4) < rlimits(i,1), mf(lim,4) = rlimits(i,1); end;
+            if mf(lim,4) < rlimits(i,1), mf(lim,4) = rlimits(i,1); end
             lim = mf(:,4) == max(mf(:,4)); mf(lim,4:5) = ones(sum(lim),1)*[rlimits(i,2) rlimits(i,2)];
-            if mf(lim,3) > rlimits(i,2), mf(lim,3) = rlimits(i,2); end;
+            if mf(lim,3) > rlimits(i,2), mf(lim,3) = rlimits(i,2); end
             mfs{i} = mf;
-         end;
-      end;
+         end
+      end
    else          % linear model
 %      mfs = {};
-      for i = 1 : NI, mfs{i} = [0 0 0 0 0]; end;
+      for i = 1 : NI, mfs{i} = [0 0 0 0 0]; end
       V = mean(dat); P = cov(dat);
       M = det(P(1:NI,1:NI)).^(1/NI)*inv(P(1:NI,1:NI));
       mu = ones(ND,1);
       [ev,ed] = eig(P); Lam = diag(ed)';
       Phi = ev(:,Lam == min(Lam));
-   end;
+   end
 
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    % Construct the FM and Part structures to be returned
@@ -278,11 +298,11 @@ for k = out                 % for given outputs
    Part.V{k} = V; Part.F{k} = P;
    Part.Phi{k} = Phi; Part.Lam{k} = Lam;
 
-end;
+end
 
-if (show ~= 0),
-   fprintf(1,['Estimating consequent parameters ...\n']); drawnow
-end;
+if (show ~= 0)
+   fprintf(1,'Estimating consequent parameters ...\n'); drawnow
+end
 
 %if any(FM.cons == 1),
 %   FM = fmest(FM,Dat,out);
@@ -293,7 +313,7 @@ FM = fmest(FM,Part,out);
 lth = length(FM.th);
 for i = lth+1 : NO, FM.th{i} = []; end
 
-if (show ~= 0),
-   fprintf(1,['Done.\n']);
+if (show ~= 0)
+   fprintf(1,'Done.\n');
    drawnow
-end;
+end

@@ -54,7 +54,7 @@ GeneralData.Properties.VariableDescriptions{4} = 'female/vrouw=0; male/mannetje=
 GeneralData.Sex = ismissing(GeneralData.Sex,'M');
 
 % Save raw data
-save([subfold,'/',d,'/GeneralDataRAW'],'GeneralData');
+save([subfold,'/',d,'/RawData/GeneralDataRAW'],'GeneralData');
 
 if TF == 1
     % Remove patients before 01-03-2012
@@ -405,7 +405,7 @@ end
     ScreeningData.dyslipratio=[]; % LDL/HDL- ratio
 
 % Save raw data
-    save([subfold,'/',d,'/ScreeningDataRAW'],'ScreeningData');
+    save([subfold,'/',d,'/RawData/ScreeningDataRAW'],'ScreeningData');
     
 % Remove patients with surgeries before 01-01-2012
     ScreeningData(~ismember([ScreeningData.PatientCode], total_patientsID),:)=[];
@@ -484,7 +484,7 @@ else
 end
 
 % Save raw data
-    save([subfold,'/',d,'/SurgeryDataRAW'],'SurgeryData');
+    save([subfold,'/',d,'/RawData/SurgeryDataRAW'],'SurgeryData');
 
 % Remove patients with surgeries before 01-01-2012
     SurgeryData(~ismember([SurgeryData.PatientCode], total_patientsID),:)=[];
@@ -589,7 +589,7 @@ else
 end
 
 % Save raw data
-    save([subfold,'/',d,'/FollowUpDataRAW'],'FollowUpData');
+    save([subfold,'/',d,'/RawData/FollowUpDataRAW'],'FollowUpData');
 
 % Remove patients with surgeries before 01-01-2012
 FollowUpData(~ismember([FollowUpData.PatientCode], total_patientsID),:)=[];
@@ -759,7 +759,7 @@ end
 clearvars ISI i PTnormal;
 
 % Save raw data
-    save([subfold,'/',d,'/LabDataRAW'],'LabResults');
+    save([subfold,'/',d,'/RawData/LabDataRAW'],'LabResults');
 
 % Remove patients with surgeries before 01-01-2012
     LabResults(~ismember([LabResults.PatientCode], total_patientsID),:)=[];
@@ -932,7 +932,7 @@ end
         PhMsNonSmokingDays m;
 
 % Save raw data
-    save([subfold,'/',d,'/PhMsDataRAW'],'PhMsData');
+    save([subfold,'/',d,'/RawData/PhMsDataRAW'],'PhMsData');
     
 % Remove patients with surgeries before 01-01-2012
 PhMsData(~ismember([PhMsData.PatientCode], total_patientsID),:)=[];
@@ -1169,7 +1169,7 @@ end
         idx_100049858 idx_100071678 idx_100004194 idx_100010479 ...
         idx_100031743 idx_100049586
 % Save raw data
-    save([subfold,'/',d,'/PPOSdataRAW2'],'PPOSdata');
+    save([subfold,'/',d,'/RawData/PPOSdataRAW2'],'PPOSdata');
     
 % Remove patients with surgeries before 01-01-2012
     PPOSdata(~ismember([PPOSdata.PatientCode], total_patientsID),:)=[];

@@ -12,6 +12,7 @@ Thumbs.db
 ########################
 *.xlsx
 *.csv
+*.icloud
 Extraction/CZE_data_extraction/**/**/*.mat
 Modeling/InterpepretabilityPaper/Datasets
 Modeling/InterpepretabilityPaper/Partitions/**
